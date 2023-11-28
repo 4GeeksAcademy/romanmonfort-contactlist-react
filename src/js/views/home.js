@@ -25,7 +25,7 @@ const home = () => {
                 </div>
             </div>
             {store.agenda && store.agenda.map((contacto,index)=>(
-            <ContactCard key={index} name={contacto.full_name} img={contacto.address} phone={contacto.phone} email={contacto.email} address={contacto.address} />))
+            <ContactCard key={index} name={contacto.full_name} img={contacto.address} phone={contacto.phone} email={contacto.email} address={contacto.address} id={contacto.id} />))
 }
 	</div>
   )

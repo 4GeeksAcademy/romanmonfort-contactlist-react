@@ -13,7 +13,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			agenda:[]
+			agenda: [],
+			contacto: {},
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -42,17 +43,114 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getAgenda: () => {
 				const url = 'https://playground.4geeks.com/apis/fake/contact/agenda/my_super_agenda'
 				fetch(url)
-				.then(response => response.json())
-				.then(data => {
-					setStore({agenda:data});
-				})
-				.catch(error => {
-					console.error('Error fetching agenda:', error);
-				  });
+					.then(response => response.json())
+					.then(data => {
+						setStore({ agenda: data });
+					})
+					.catch(error => {
+						console.error('Error fetching agenda:', error);
+					});
 			},
-			updateContact: ()=>{}
+			createContact: async (Name, Email, Address, Phone) => {
+				try {
+					const store = getStore();
+
+					const newContacto = {
+						full_name: Name,
+						email: Email,
+						agenda_slug: 'my_super_agenda',
+						address: Address,
+						phone: Phone,
+					};
+
+					const response = await fetch('https://playground.4geeks.com/apis/fake/contact/', {
+						method: "POST",
+						body: JSON.stringify(newContacto),
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+
+					if (response.ok) {
+						console.log("Contacto creado exitosamente");
+					} else {
+						console.error("Error al crear el contacto:", response.status);
+					}
+				} catch (error) {
+					console.error("Error en la solicitud:", error);
+				}
+			},
+
+			updateContact: (Name, Email, Address, Phone, id) => {
+
+				const editContact = {
+					full_name: Name,
+					email: Email,
+					agenda_slug: 'my_super_agenda',
+					address: Address,
+					phone: Phone,
+				};
+
+				try {
+					const response = fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(editContact)
+					});
+
+					if (response.ok) {
+						console.log("Contacto editado exitosamente");
+					} else {
+						console.error("Error al editar el contacto:", response.status);
+					}
+				} catch (error) {
+					console.error("Error en la solicitud:", error);
+				}
+			},
+
+
+			getContact: (id) => {
+
+				const url = `https://playground.4geeks.com/apis/fake/contact/${id}`
+				fetch(url)
+					.then(response => response.json())
+					.then(data => {
+						setStore({contacto : data});
+						console.log(data)
+					})
+					.catch(error => {
+						console.error('Error fetching agenda:', error);
+					});
+			},
+
+
+
+
+
+			deleteContact: async (id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+						method: "DELETE",
+						headers: {
+							"Content-Type": "application/json"
+						}
+					});
+
+					if (response.ok) {
+						console.log("Contacto eliminado exitosamente");
+					} else {
+						console.error("Error al eliminar el contacto:", response.status);
+					}
+				} catch (error) {
+					console.error("Error en la solicitud:", error);
+				}
+			}
+
 		}
-	};
+	}
 };
+
 
 export default getState;

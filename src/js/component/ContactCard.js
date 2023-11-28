@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { Context } from '../store/appContext'
 
 const ContactCard = (props) => {
+    const { store, actions } = useContext(Context)
     return (
         <div className='container mt-5'>
             <div className='row border'>
@@ -21,11 +23,19 @@ const ContactCard = (props) => {
                 </div>
                 <div className='col-3'></div>
                 <div className='col-2 d-flex '>
-                   
-                  <Link to="/edit-contact"><i className="fa-solid fa-pen m-3" style={{ color: "#000000" }}></i></Link>  
+
+                    <Link to="/edit-contact" onClick={(e)=>{actions.getContact(props.id)}}><i className="fa-solid fa-pen m-3" style={{ color: "#000000" }}></i></Link>
 
 
-                   <i onClick={()=>{}} className="fa-solid fa-trash m-3" style={{ color: "#000000" }}></i> 
+                    <i
+                        onClick={() => {
+                            if (window.confirm("¿Estás seguro de que quieres eliminar este contacto?")) {
+                                actions.deleteContact(props.id);
+                            }
+                        }}
+                        className="fa-solid fa-trash m-3"
+                        style={{ color: "#000000" }}
+                    ></i>
 
                 </div>
             </div>
