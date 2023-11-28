@@ -66,7 +66,7 @@ const EditContact = () => {
               placeholder="Enter Address"
             />
           </label>
-          <Link className="link" to="/">
+        
           <button
             className="btn btn-success mt-4"
             type="submit"
@@ -74,7 +74,7 @@ const EditContact = () => {
           >
             Save
           </button> 
-          </Link>
+          
           <Link className="mt-3" to="/">
             Or Get back to contacts
           </Link>
