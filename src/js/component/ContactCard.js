@@ -24,7 +24,7 @@ const ContactCard = (props) => {
                 <div className='col-3'></div>
                 <div className='col-2 d-flex '>
 
-                    <Link to="/edit-contact" onClick={(e)=>{actions.getContact(props.id)}}><i className="fa-solid fa-pen m-3" style={{ color: "#000000" }}></i></Link>
+                    <Link to="/edit-contact" onClick={(e)=>{actions.getContact(props.index)}}><i className="fa-solid fa-pen m-3" style={{ color: "#000000" }}></i></Link>
 
 
                     <i

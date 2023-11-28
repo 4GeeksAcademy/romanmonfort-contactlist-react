@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			],
 			agenda: [],
-			contacto: {},
+			contacto: [],
+			
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -108,10 +109,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("Error en la solicitud:", error);
 				}
+				actions.getAgenda()
 			},
 
 
-			getContact: (id) => {
+			/* getContact: (id) => {
 
 				const url = `https://playground.4geeks.com/apis/fake/contact/${id}`
 				fetch(url)
@@ -123,7 +125,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => {
 						console.error('Error fetching agenda:', error);
 					});
-			},
+			}, */
+			getContact: (index) => {
+				const store = getStore(); // Accede al estado global directamente
+				
+			    
+				setStore({contacto : store.agenda[index]})
+				console.log(store.contacto)
+			  
+			  },
 
 
 
@@ -146,6 +156,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error("Error en la solicitud:", error);
 				}
+				actions.getAgenda()
 			}
 
 		}

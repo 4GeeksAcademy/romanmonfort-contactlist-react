@@ -7,10 +7,10 @@ import "../../styles/home.css"
 const home = () => {
   const{store,actions}=useContext(Context);
   
-  
+ 
+
   
 
- console.log(store.agenda)
 
   return (
 	<div className='container mt-5'>
@@ -25,7 +25,7 @@ const home = () => {
                 </div>
             </div>
             {store.agenda && store.agenda.map((contacto,index)=>(
-            <ContactCard key={index} name={contacto.full_name} img={contacto.address} phone={contacto.phone} email={contacto.email} address={contacto.address} id={contacto.id} />))
+            <ContactCard key={index} name={contacto.full_name} img={contacto.address} phone={contacto.phone} email={contacto.email} address={contacto.address} index={index} id={contacto.id} />))
 }
 	</div>
   )

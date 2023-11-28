@@ -9,6 +9,9 @@ const EditContact = () => {
   const [Address, setAddress] = useState(store.contacto.address || "");
   const [Phone, setPhone] = useState(store.contacto.phone || "");
   const [Id, setId] = useState(store.contacto.id || "");
+ 
+
+ 
 
   const handleSave = () => {
     actions.updateContact(Name, Email, Address, Phone, Id);
@@ -63,13 +66,15 @@ const EditContact = () => {
               placeholder="Enter Address"
             />
           </label>
+          <Link className="link" to="/">
           <button
             className="btn btn-success mt-4"
-            type="button"
+            type="submit"
             onClick={handleSave}
           >
             Save
-          </button>
+          </button> 
+          </Link>
           <Link className="mt-3" to="/">
             Or Get back to contacts
           </Link>
